@@ -14,13 +14,19 @@ get_header(); ?>
           <time datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('d.m.'); ?><span class="year"><?php the_time('Y'); ?></span></time>
 
           <h1><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
-          <p><?php the_tags('Tags: ', ', ', ''); ?></p>
-          <p> Kategorie <?php the_category(', ') ?> | <?php edit_post_link('Bearbeiten', '', ' | '); ?>  <?php comments_popup_link('Keine Kommentare &#187;', '1 Kommentar &#187;', '% Kommentare &#187;'); ?></p>
+
+
+          <?php if (! is_page()) : ?>
+          	<p><?php the_tags('Tags: ', ', ', ''); ?></p>
+          	<p> Kategorie <?php the_category(', ') ?> | <?php edit_post_link('Bearbeiten', '', ' | '); ?>  <?php comments_popup_link('Keine Kommentare &#187;', '1 Kommentar &#187;', '% Kommentare &#187;'); ?></p>
+			<?php else: ?>
+				<p><?php edit_post_link('Bearbeiten', '', ''); ?></p>
+			<?php endif; ?>
+
         </header>
         <?php the_content('Ganzen Beitrag lesen &raquo;'); ?>
 
         <?php if (is_singular()) : ?>
-          <?php the_tags( '<p>Tags: ', ', ', '</p>'); ?>
           <?php if (! is_page()) : ?>
             <p class="postmetadata alt">
               <small>
@@ -44,6 +50,12 @@ Sie können ein <a href="#respond">Kommentar</a> schreiben.
             </p>
 
             <?php comments_template(); ?>
+          <?php elseif ($post->ID == 2910) : ?>
+				<p>Liste aller Monate, in denen ich gebloggt habe inklusive Anzahl veröffentlichter Beiträge:</p>
+				<p><ul id="archivelist"><?php wp_get_archives( array(
+							'show_post_count' => '1',
+						));
+					?></ul></p>
           <?php endif; ?>
 
         <?php endif; ?>

@@ -362,6 +362,10 @@ img.alignleft {
   margin: 0.5em 0 1em;
 }
 
+#archivelist {
+  list-style: none;
+}
+
 textarea {
   padding: 2px;
   width: 100%;
